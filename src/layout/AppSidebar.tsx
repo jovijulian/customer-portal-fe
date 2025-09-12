@@ -81,16 +81,11 @@ const navItems: NavItem[] = [
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
-  const role = typeof window !== "undefined" ? localStorage.getItem("role") : null;
+  const role = "2";
   const isMechanic = role == "2";
 
   const filteredNavItems = React.useMemo(() => {
-    // Jika role adalah '3'
-    if (role === '3') {
-      const allowedMenus = ["Dashboard", "Transaction", "Customers"];
-      return navItems.filter(item => allowedMenus.includes(item.name));
-    }
-    // Jika role lain (selain mekanik, yang sudah di-handle di bawah)
+   
     return navItems;
   }, [role]); // Dijalankan ulang hanya jika userRole berubah
   const renderMenuItems = (
