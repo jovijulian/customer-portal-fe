@@ -6,17 +6,17 @@ import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 import DemographicCard from "@/components/ecommerce/DemographicCard";
-import Dashboard from "./dashboard";
+import Home from "../(admin)/home/home";
 
 export const metadata: Metadata = {
   title:
-    "Dashboard | Bacip Moto",
+    "Home | Customer Portal",
 };
 
 export default function Ecommerce() {
   return (
     <>
-      <Dashboard />
+      <Home />
     </>
   );
 }
