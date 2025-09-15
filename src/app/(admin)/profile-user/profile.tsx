@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
   const handleLogout = () => {
     // Tampilkan konfirmasi sebelum logout
-    if (window.confirm('Apakah Anda yakin ingin keluar?')) {
+    // if (window.confirm('Apakah Anda yakin ingin keluar?')) {
       // Hapus data dari Context
       if(setUserData) {
           setUserData(null);
@@ -59,7 +59,7 @@ const ProfilePage = () => {
       
       // Arahkan ke halaman login
       router.push('/signin');
-    }
+    // }
   };
 
   return (

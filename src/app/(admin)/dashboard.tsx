@@ -7,7 +7,7 @@ import { endpointUrl, httpGet, httpPost } from "../../../helpers";
 import moment from "moment";
 
 export const metadata: Metadata = {
-    title: "Dashboard | Bacip Moto",
+    title: "Dashboard | Customer Portal",
 };
 
 export default function Dashboard() {

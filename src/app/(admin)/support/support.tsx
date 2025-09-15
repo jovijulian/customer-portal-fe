@@ -52,7 +52,7 @@ const SupportHubPage = () => {
                 <p className="text-gray-500 mt-2">Kami siap membantu setiap kendala Anda.</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8">
 
                 <LiveChatWidget />
               

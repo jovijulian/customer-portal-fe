@@ -78,16 +78,16 @@ const SignIn: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-slate-100 animate-gradient-xy"></div>
-      <div className="absolute inset-0 bg-slate-100 opacity-25"></div>
+      {/* <div className="absolute inset-0 bg-slate-100 animate-gradient-xy"></div>
+      <div className="absolute inset-0 bg-slate-100 opacity-25"></div> */}
       <div className="relative w-full max-w-md px-4 z-10">
-        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl shadow-black/25 p-8 sm:p-10 relative overflow-hidden group hover:bg-white/15 transition-all duration-300">
+        <div className="bg-white/10 border border-black/20 rounded-3xl p-8 sm:p-10 relative overflow-hidden group hover:bg-white/15 transition-all duration-300">
           <div className="relative z-10">
             <div className="text-center mb-10">
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-3 transition-all duration-500">
+              <h1 className="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-white mb-3 transition-all duration-500">
                 NetHome
               </h1>
-              <div className="h-1 w-20 mx-auto bg-gray-400 rounded-full mb-4 "></div>
+              <div className="h-1 w-20 mx-auto bg-blue-400 rounded-full mb-4 "></div>
               <p className="text-gray-400 text-base sm:text-lg font-medium">
                 Portal Pelanggan WiFi Rumahan
               </p>

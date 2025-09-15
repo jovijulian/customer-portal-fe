@@ -16,38 +16,29 @@ export default function AdminLayout({
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
   const role = "2";
   const isMechanic = role == "2";
-  const mainContentMargin = isMechanic
-    ? "ml-0"
-    : isMobileOpen
-      ? "ml-0"
-      : isExpanded || isHovered
-        ? "lg:ml-[290px]"
-        : "lg:ml-[90px]";
 
   return (
     <UserStatusProvider> 
-    <div className="min-h-screen xl:flex">
-      <AppSidebar />
-      <Backdrop />
-      <div
-        className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}
-      >
-        <AppHeader />
-
-        <main className="mx-auto max-w-screen-xl p-4 md:p-6 pb-20 pt-20">
-          <React.Suspense
-            fallback={
-              <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
-              </div>
-            }
-          >
-            {children}
-          </React.Suspense>
-        </main>
-        <AppFooter />
+      <div className="min-h-screen bg-gray-50 flex justify-center">
+        {/* Container with mobile-like width */}
+        <div className="w-full max-w-md bg-white min-h-screen shadow-lg relative">
+          <AppHeader />
+          
+          <main className="p-4 pb-20 pt-20">
+            <React.Suspense
+              fallback={
+                <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60">
+                  <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
+                </div>
+              }
+            >
+              {children}
+            </React.Suspense>
+          </main>
+          
+          <AppFooter />
+        </div>
       </div>
-    </div>
     </UserStatusProvider>
   );
 }

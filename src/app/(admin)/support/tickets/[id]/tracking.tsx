@@ -71,14 +71,14 @@ const TicketDetailPage = () => {
         <p className="text-gray-500 mt-1">Kategori: <span className="font-semibold">{ticketData.category}</span></p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 gap-6">
+        <div className="">
           <LiveTrackingMap
             position={ticketData.technician.position}
             technicianName={ticketData.technician.name}
           />
         </div>
-        <div className="lg:col-span-1 space-y-6">
+        <div className="space-y-6">
           <TechnicianCard
             name={ticketData.technician.name}
             eta={ticketData.technician.eta}

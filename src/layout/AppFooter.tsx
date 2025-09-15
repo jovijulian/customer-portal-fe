@@ -17,7 +17,7 @@ const AppFooter = () => {
     const { isOutOfQuota, handleFabClick } = useUserStatus();
 
     return (
-        <footer className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 md:hidden shadow-lg">
+        <footer className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-50 bg-white border-t border-gray-200 shadow-lg w-full max-w-md">
             <div className="flex justify-around items-center h-16 pb-[env(safe-area-inset-bottom)] relative">
                 <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
                     <button
@@ -27,7 +27,6 @@ const AppFooter = () => {
                     >
                         <FaPowerOff className="w-7 h-7" />
                         <span className="text-xs font-bold mt-1">Connect</span>
-
                     </button>
                 </div>
 

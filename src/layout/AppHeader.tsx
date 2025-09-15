@@ -24,9 +24,8 @@ const AppHeader = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm md:hidden mb-3">
+    <header className="fixed top-0 left-1/2 transform -translate-x-1/2 z-40 bg-white border-b border-gray-200 shadow-sm w-full max-w-md mb-3">
       <div className="flex items-center justify-between h-16 px-4">
-
         <div className="flex flex-col">
           <span className="text-xs text-gray-500">{getGreeting()},</span>
           <span className="font-bold text-gray-800 -mt-1">
@@ -35,9 +34,6 @@ const AppHeader = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* <button className="text-gray-600 hover:text-blue-600 transition-colors">
-            <FaSearch className="w-5 h-5" />
-          </button> */}
           <Link href="/settings/wifi" className="text-gray-600 hover:text-blue-600 transition-colors">
             <FaCog className="w-5 h-5" />
           </Link>
