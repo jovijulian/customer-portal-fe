@@ -64,7 +64,7 @@ const UserInfoCard: React.FC<Props> = ({ data }) => {
         <p className="text-xs text-gray-500 mt-1.5 text-right">Total Kuota: {data.totalQuota.toFixed(1)} GB</p>
       </div>
 
-      <Link href="/packages/upgrade" className="w-full flex justify-between items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+      <Link href="/packages" className="w-full flex justify-between items-center p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
         <span className="font-semibold text-gray-700">Upgrade Paket & Kecepatan</span>
         <FaChevronRight className="text-gray-500" />
       </Link>

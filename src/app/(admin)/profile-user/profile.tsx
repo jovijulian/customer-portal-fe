@@ -83,17 +83,17 @@ const ProfilePage = () => {
         <div className="space-y-3">
           <h3 className="px-2 text-sm font-semibold text-gray-400 uppercase">Pengaturan Akun</h3>
           <ProfileMenuItem 
-            href="/profile/edit" 
+            href="/profile-user/edit" 
             icon={FaEdit} 
             title="Edit Profil" 
             subtitle="Ubah nama, email, & nomor telepon" 
           />
-          <ProfileMenuItem 
+          {/* <ProfileMenuItem 
             href="/profile/change-password" 
             icon={FaLock} 
             title="Ubah Password" 
             subtitle="Ganti password login aplikasi Anda" 
-          />
+          /> */}
           <h3 className="px-2 pt-4 text-sm font-semibold text-gray-400 uppercase">Pengaturan Layanan</h3>
           <ProfileMenuItem 
             href="/settings/wifi" 
