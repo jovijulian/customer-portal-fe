@@ -20,8 +20,8 @@ interface Props {
 const LiveTrackingMap: React.FC<Props> = ({ position, technicianName }) => {
     return (
         <div>
-            <div className="h-[400px] w-full rounded-2xl overflow-hidden shadow-lg">
-                <MapContainer center={position} zoom={15} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
+            <div className="h-[400px] w-full rounded-2xl overflow-hidden shadow-lg z-0">
+                <MapContainer center={position} zoom={15} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
