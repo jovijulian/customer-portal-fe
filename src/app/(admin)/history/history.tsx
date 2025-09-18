@@ -87,31 +87,7 @@ const HistoryPage = () => {
         </div>
       </div>
 
-      {/* --- KARTU TABEL RINCIAN --- */}
-      <div className="bg-white rounded-2xl shadow-lg p-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <FaClipboardList className="text-blue-600"/>
-            Rincian Harian
-        </h2>
-        <div className="max-h-96 overflow-y-auto">
-            <table className="w-full text-sm text-left text-gray-500">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">Tanggal</th>
-                        <th scope="col" className="px-6 py-3 text-right">Total Pemakaian</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {usageData.map((day) => (
-                        <tr key={day.date} className="bg-white border-b hover:bg-gray-50">
-                            <td className="px-6 py-4 font-medium text-gray-900">{day.date}</td>
-                            <td className="px-6 py-4 text-right font-semibold">{day.usage} GB</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-      </div>
+     
     </div>
   );
 };

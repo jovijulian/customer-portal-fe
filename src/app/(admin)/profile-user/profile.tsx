@@ -74,7 +74,7 @@ const ProfilePage = () => {
         <FaUserCircle className="w-16 h-16 text-gray-300" />
         <div>
           <h2 className="text-2xl font-bold text-gray-800">{userName}</h2>
-          <p className="text-gray-500">ID Pelanggan: {userData?.wifiId || '...'}</p>
+          <p className="text-gray-500">ID Pelanggan: {userData?.cid || '...'}</p>
         </div>
       </div>
 

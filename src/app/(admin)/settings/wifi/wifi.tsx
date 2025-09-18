@@ -116,7 +116,7 @@ const WifiManagementPage = () => {
         </form>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-7">
+      {/* <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-7">
         <h2 className="text-xl font-bold text-gray-800 mb-2">Aksi Perangkat</h2>
         <p className="text-gray-500 mb-6">Jika koneksi internet Anda terasa lambat atau bermasalah, coba reboot modem.</p>
         <button
@@ -127,7 +127,7 @@ const WifiManagementPage = () => {
           <FaSyncAlt className={isRebooting ? 'animate-spin' : ''} />
           {isRebooting ? 'Sedang Me-reboot...' : 'Reboot Modem'}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

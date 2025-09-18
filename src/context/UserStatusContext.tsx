@@ -1,20 +1,26 @@
 "use client";
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
+// PERUBAHAN: Sesuaikan interface dengan data baru
 interface UserWifiData {
-  wifiId: string;
-  activeUntil: string;
-  status: 'Active' | 'Inactive' | 'Suspended';
-  totalQuota: number;
-  remainingQuota: number;
+    cid: string;
+    customerName: string;
+    phone: string;
+    address: string;
+    packageName: string;
+    packageSpeed: number;
+    startTime: string;
+    endTime: string;
+    status: 'Active' | 'Inactive' | 'Suspended';
 }
 
+// PERUBAHAN: Ubah nama properti agar lebih relevan
 interface UserStatusContextType {
   userData: UserWifiData | null;
   setUserData: React.Dispatch<React.SetStateAction<UserWifiData | null>>;
-  isOutOfQuota: boolean;
+  isExpired: boolean; // Menggantikan isOutOfQuota
   handleFabClick: () => void;
 }
 
@@ -22,25 +28,39 @@ const UserStatusContext = createContext<UserStatusContextType | undefined>(undef
 
 export const UserStatusProvider = ({ children }: { children: ReactNode }) => {
   const [userData, setUserData] = useState<UserWifiData | null>(null);
+  const [isExpired, setIsExpired] = useState(false);
 
-  const isOutOfQuota = userData ? userData.remainingQuota <= 0 : false;
+  // PERUBAHAN: Logika untuk mengecek tanggal kedaluwarsa
+  useEffect(() => {
+    if (userData?.endTime) {
+      // Ubah format tanggal 'DD/MM/YYYY HH:mm:ss' menjadi 'MM/DD/YYYY HH:mm:ss' agar bisa diparsing
+      const [datePart, timePart] = userData.endTime.split(' ');
+      const [day, month, year] = datePart.split('/');
+      const formattedDateString = `${month}/${day}/${year} ${timePart}`;
+      
+      const endTimeDate = new Date(formattedDateString);
+      const now = new Date();
+      
+      setIsExpired(now > endTimeDate);
+    } else {
+      setIsExpired(false);
+    }
+  }, [userData]); // Dijalankan setiap kali data user berubah
 
+  // PERUBAHAN: Logika baru untuk tombol FAB
   const handleFabClick = () => {
-    if (userData) {
-      toast.info("Menampilkan iklan... Mohon tunggu 5 detik.", { autoClose: 5000 });
-      setTimeout(() => {
-        setUserData({
-          ...userData,
-          totalQuota: 0.5,
-          remainingQuota: 0.5,
-        });
-        toast.success("Anda mendapatkan 500MB kuota darurat dengan kecepatan 1Mbps!");
-      }, 5000);
-    } 
+    if (isExpired) {
+      // Jika paket expired, arahkan untuk perpanjang
+      toast.warn("Paket Anda telah berakhir. Silakan pilih paket baru.");
+      window.location.href = "/packages";
+    } else {
+      // Jika paket aktif, berfungsi sebagai tombol bantuan
+      window.location.href = "/support/create-ticket";
+    }
   };
   
   return (
-    <UserStatusContext.Provider value={{ userData, setUserData, isOutOfQuota, handleFabClick }}>
+    <UserStatusContext.Provider value={{ userData, setUserData, isExpired, handleFabClick }}>
       {children}
     </UserStatusContext.Provider>
   );

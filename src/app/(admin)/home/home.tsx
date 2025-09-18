@@ -9,11 +9,15 @@ import TipsAndTricksCard from "@/components/home/TipsAndTricksCard";
 import { useUserStatus } from "@/context/UserStatusContext";
 
 export interface UserWifiData {
-    wifiId: string;
-    activeUntil: string;
+    cid: string;
+    customerName: string;
+    address: string;
+    phone: string;
+    packageName: string;
+    packageSpeed: number;
+    startTime: string; 
+    endTime: string;
     status: 'Active' | 'Inactive' | 'Suspended';
-    totalQuota: number; 
-    remainingQuota: number; 
 }
 
 interface DailyUsage {
@@ -46,11 +50,15 @@ export default function HomePage() {
 
     useEffect(() => {
         const mockUserData: UserWifiData = {
-            wifiId: "Nethome-BDI-0012",
-            activeUntil: "21 Feb 2026",
+            cid: "11223344",
+            customerName: "Budi Santoso",
+            phone: "081313162548",
+            address: "Jl. Soekarno Hatta No. 456, Bandung",
+            packageName: "Free 1 Bulan GKI 200",
+            packageSpeed: 200, 
+            startTime: "16/09/2025", 
+            endTime: "16/10/2025",
             status: 'Active',
-            totalQuota: 50.0,
-            remainingQuota: 0,
         };
         if (setUserData) {
             setUserData(mockUserData);

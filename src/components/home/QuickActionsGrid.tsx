@@ -1,10 +1,11 @@
 import React from 'react';
-import { FaBoxOpen, FaMoneyBillWave, FaHistory, FaHeadset } from 'react-icons/fa';
+import { FaBoxOpen, FaMoneyBillWave, FaHistory, FaHeadset, FaTachometerAlt } from 'react-icons/fa';
 import Link from 'next/link';
 
 const actions = [
   { label: 'Beli Paket', icon: FaBoxOpen, href: '/packages' },
   { label: 'Bayar Tagihan', icon: FaMoneyBillWave, href: '/billing' },
+  { label: 'Uji Cepat', icon: FaTachometerAlt, href: '/speedtest' },
   { label: 'Riwayat Pakai', icon: FaHistory, href: '/history' },
   { label: 'Pusat Bantuan', icon: FaHeadset, href: '/support' },
 ];
@@ -12,7 +13,7 @@ const actions = [
 const QuickActionsGrid = () => {
   return (
     <div className="p-4 bg-white rounded-2xl shadow-lg">
-      <div className="grid grid-cols-4 gap-2 text-center">
+      <div className="grid grid-cols-5 gap-2 text-center">
         {actions.map((action) => (
           <Link 
             href={action.href} 
