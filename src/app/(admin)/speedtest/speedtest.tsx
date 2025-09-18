@@ -40,7 +40,7 @@ const SpeedTestPage = () => {
     const measureDownload = async (onProgress: (speed: number) => void): Promise<number> => {
         return new Promise((resolve) => {
             let currentSpeed = 0;
-            let maxSpeed = packageSpeed * (0.8 + Math.random() * 0.3);
+            const maxSpeed = packageSpeed * (0.8 + Math.random() * 0.3);
             let dataPoints = 0;
             const totalDataPoints = 20;
 
@@ -73,7 +73,7 @@ const SpeedTestPage = () => {
     const measureUpload = async (onProgress: (speed: number) => void): Promise<number> => {
         return new Promise((resolve) => {
             let currentSpeed = 0;
-            let maxSpeed = download * (0.4 + Math.random() * 0.3); // Upload typically slower
+            const maxSpeed = download * (0.4 + Math.random() * 0.3); // Upload typically slower
             let dataPoints = 0;
             const totalDataPoints = 15;
 
@@ -127,7 +127,7 @@ const SpeedTestPage = () => {
             setTestState('testing-download');
             setGraphData([]);
             setTestProgress(0);
-            let downloadDataPoints: { time: number, speed: number }[] = [];
+            const downloadDataPoints: { time: number, speed: number }[] = [];
 
             const downloadSpeed = await measureDownload((speed) => {
                 downloadDataPoints.push({
@@ -144,7 +144,7 @@ const SpeedTestPage = () => {
             setTestState('testing-upload');
             setGraphData([]);
             setTestProgress(0);
-            let uploadDataPoints: { time: number, speed: number }[] = [];
+            const uploadDataPoints: { time: number, speed: number }[] = [];
 
             const uploadSpeed = await measureUpload((speed) => {
                 uploadDataPoints.push({

@@ -14,7 +14,7 @@ const navItems = [
 
 const AppFooter = () => {
     const pathname = usePathname();
-    const { isOutOfQuota, handleFabClick } = useUserStatus();
+    const {  handleFabClick } = useUserStatus();
 
     return (
         <footer className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-50 bg-white border-t border-gray-200 shadow-lg w-full max-w-md">

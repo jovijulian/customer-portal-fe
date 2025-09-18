@@ -10,7 +10,6 @@ const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<{ variant: any; title: string; message: string; showLink: boolean; linkHref: string; linkText: string } | null>(null);
 
-  // Perubahan pada state form: dari nik menjadi cid dan phone
   const form = useForm({
     initialValues: {
       cid: "",
@@ -30,7 +29,6 @@ const SignIn: React.FC = () => {
     await new Promise(resolve => setTimeout(resolve, 1500)); 
 
     try {
-      // Data mock baru disesuaikan dengan CID dan Phone
       const mockUsers = [
         { cid: "11223344", phone: "081313162548", name: "Budi Santoso", id: "user-001" },
         { cid: "JKT-0015", phone: "089876543210", name: "John Doe", id: "user-002" },
@@ -104,7 +102,7 @@ const SignIn: React.FC = () => {
                   {...form.getInputProps("cid")}
                   id="cid"
                   type="text"
-                  placeholder="Contoh: BDI-0012"
+                  placeholder="Contoh: 11223344"
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   disabled={loading}
                 />
