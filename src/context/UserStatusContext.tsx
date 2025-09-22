@@ -5,15 +5,15 @@ import { toast } from 'react-toastify';
 
 // PERUBAHAN: Sesuaikan interface dengan data baru
 interface UserWifiData {
-    cid: string;
-    customerName: string;
-    phone: string;
-    address: string;
-    packageName: string;
-    packageSpeed: number;
-    startTime: string;
-    endTime: string;
-    status: 'Active' | 'Inactive' | 'Suspended';
+  cid: string;
+  customerName: string;
+  address: string;
+  phoneNo: string;
+  packageName: string;
+  packageSpeed: number;
+  startTime: string;
+  endTime: string;
+  status: 'Active' | 'Idle' | 'Locked' | 'Suspended' | 'Canceled' | 'Other';
 }
 
 // PERUBAHAN: Ubah nama properti agar lebih relevan
@@ -37,10 +37,10 @@ export const UserStatusProvider = ({ children }: { children: ReactNode }) => {
       const [datePart, timePart] = userData.endTime.split(' ');
       const [day, month, year] = datePart.split('/');
       const formattedDateString = `${month}/${day}/${year} ${timePart}`;
-      
+
       const endTimeDate = new Date(formattedDateString);
       const now = new Date();
-      
+
       setIsExpired(now > endTimeDate);
     } else {
       setIsExpired(false);
@@ -58,7 +58,7 @@ export const UserStatusProvider = ({ children }: { children: ReactNode }) => {
       window.location.href = "/support/create-ticket";
     }
   };
-  
+
   return (
     <UserStatusContext.Provider value={{ userData, setUserData, isExpired, handleFabClick }}>
       {children}

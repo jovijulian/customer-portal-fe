@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "@mantine/form";
-import { setCookie } from "cookies-next";
+import { deleteCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { FaUserShield, FaPhoneAlt, FaSignInAlt } from "react-icons/fa";
 import Alert from "@/components/ui/alert/Alert";
+import { endpointUrl, httpGet, httpPost } from "../../../helpers";
+import axios from "axios";
+import { Root } from "@/types";
 
 const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -17,61 +20,65 @@ const SignIn: React.FC = () => {
     },
     validate: {
       cid: (value: any) =>
-        value.length < 5 ? "Customer ID minimal 5 karakter" : null,
+        !/^[0-9]+$/.test(value) ? "Customer ID hanya boleh berisi angka." : null,
       phone: (value: any) =>
-        !/^(08)\d{8,11}$/.test(value) ? "Format nomor telepon salah (contoh: 0812...)" : null,
+        !/^(08)\d{8,11}$/.test(value) ? "Format nomor telepon salah (contoh: 0812...)." : null,
     },
   });
+
+  const getMe = async () => {
+    try {
+      const response = await httpGet(endpointUrl(`b2c/b2c-user`), true);
+      if (response.data.code === 200) {
+        const user = response.data.data;
+
+        localStorage.setItem("customer_name", user.customerName);
+        localStorage.setItem("customer_id", user.id);
+        localStorage.setItem("cid", user.cid);
+
+        toast.success(`Selamat datang, ${user.customerName}! Mengalihkan...`);
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1500);
+      } else {
+        throw new Error('Gagal mengambil data pengguna.');
+      }
+    } catch (error) {
+      localStorage.removeItem('token');
+      deleteCookie('token');
+      throw new Error('Sesi tidak valid, silakan login kembali.');
+    }
+  }
 
   const onSubmit = async (payload: typeof form.values) => {
     setLoading(true);
     setAlert(null);
-    await new Promise(resolve => setTimeout(resolve, 1500)); 
-
+    const loginPayload = {
+      username: payload.cid,
+      password: payload.phone
+    }
     try {
-      const mockUsers = [
-        { cid: "11223344", phone: "081313162548", name: "Budi Santoso", id: "user-001" },
-        { cid: "JKT-0015", phone: "089876543210", name: "John Doe", id: "user-002" },
-      ];
-
-      const user = mockUsers.find(u => u.cid.toLowerCase() === payload.cid.toLowerCase() && u.phone === payload.phone);
-
-      if (user) {
-        const mockResponse = {
-          token: "ini_adalah_mock_jwt_token_untuk_customer_NAMI",
-          user: {
-            id: user.id,
-            name: user.name,
-            cid: user.cid,
-            phone: user.phone,
-            role_id: 3
-          },
-        };
-
-        localStorage.setItem("token", mockResponse.token);
-        localStorage.setItem("role", mockResponse.user.role_id.toString());
-        localStorage.setItem("name", mockResponse.user.name);
-        localStorage.setItem("user_id", mockResponse.user.id);
-        setCookie("token", mockResponse.token, {});
-        setCookie("role", mockResponse.user.role_id.toString());
-
-        toast.success(`Selamat datang, ${user.name}! Mengalihkan...`);
-
-        setTimeout(() => {
-          window.location.href = "/"; // Arahkan ke halaman utama setelah login
-        }, 2000);
-      } else {
-        throw new Error("Customer ID atau Nomor Telepon tidak cocok.");
+      const loginResponse = await httpPost(endpointUrl(`auth/b2c-user/login`), loginPayload);
+      console.log(loginResponse.data.data)
+      if (loginResponse.data.code === 500) {
+        setAlert({
+          variant: "error",
+          title: "Login Gagal",
+          message: loginResponse.data.msg,
+          showLink: true,
+          linkHref: "https://wa.me/628123456789",
+          linkText: "Hubungi Customer Service",
+        });
+      }
+      if (loginResponse.data.code === 200) {
+        const { access_token } = loginResponse.data.data;
+        localStorage.setItem("token", access_token);
+        setCookie("token", access_token, {});
+        await getMe();
       }
     } catch (error: any) {
-      setAlert({
-        variant: "error",
-        title: "Login Gagal",
-        message: error.message || "Terjadi kesalahan.",
-        showLink: true,
-        linkHref: "https://wa.me/628123456789", // Ganti dengan nomor CS Anda
-        linkText: "Hubungi Customer Service",
-      });
+      throw new Error('Terjadi kesalahan saat proses login. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -93,7 +100,10 @@ const SignIn: React.FC = () => {
           <form onSubmit={form.onSubmit(onSubmit)} className="space-y-6">
             {/* Input Customer ID */}
             <div>
-              <label htmlFor="cid" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="cid"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Customer ID (CID)
               </label>
               <div className="relative">
@@ -102,12 +112,18 @@ const SignIn: React.FC = () => {
                   {...form.getInputProps("cid")}
                   id="cid"
                   type="text"
+                  inputMode="numeric" 
+                  pattern="[0-9]*"   
                   placeholder="Contoh: 11223344"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+                  }}
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   disabled={loading}
                 />
               </div>
             </div>
+
 
             {/* Input Nomor Telepon */}
             <div>

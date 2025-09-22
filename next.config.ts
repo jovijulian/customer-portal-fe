@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   env: {
-    BASE_URL: "https://api.bacipmoto.com/api/",
+    BASE_URL: "https://radians.remala.co.id/prod-api/",
   },
   experimental: {
     optimizePackageImports: [

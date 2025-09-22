@@ -30,7 +30,7 @@ const UserInfoCard: React.FC<Props> = ({ data }) => {
             <div>
               <p className="font-bold text-lg">{data.customerName}</p>
               <p className="text-sm text-gray-500">CID: {data.cid}</p>
-              <p className="text-sm text-gray-500">Telepon: {data.phone}</p>
+              <p className="text-sm text-gray-500">Telepon: {data.phoneNo}</p>
             </div>
           </div>
           <span className={`px-3 py-1 text-sm font-bold rounded-full ${getStatusChipColor(data.status)}`}>
